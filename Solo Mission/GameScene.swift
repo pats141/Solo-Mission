@@ -14,12 +14,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //declaring the player spaceship
     let player = SKSpriteNode(imageNamed: "spaceship")
     
+    var gameScore = 0
+    let scoreLabel = SKLabelNode(fontNamed: "The Bold Font")
+    
+    var levelNumber = 1
+    var livesNumber = 3
+    let livesLabel = SKLabelNode(fontNamed: "The Bold Font")
+    
 //    Creating the physics behind the game, assigning each category to a number with binary code
     struct PhysicsCategories {
         static let None: UInt32 = 0
         static let Player: UInt32 = 0b1 //1
         static let Bullet: UInt32 = 0b10 //2
         static let Enemy: UInt32 = 0b100 //4
+        
     }
     
     func random() -> CGFloat {
@@ -69,8 +77,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.physicsBody!.contactTestBitMask = PhysicsCategories.Enemy
         self.addChild(player)
         
+        scoreLabel.text = "Score: 0"
+        scoreLabel.fontSize = 50
+        scoreLabel.fontColor = SKColor.white
+        scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        scoreLabel.position = CGPoint(x: self.size.width*0.2, y: self.size.height*0.89)
+        scoreLabel.zPosition = 100
+        self.addChild(scoreLabel)
+        
+        livesLabel.text = "Lives: 3"
+        livesLabel.fontSize = 50
+        livesLabel.fontColor = SKColor.white
+        livesLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
+        livesLabel.position = CGPoint(x: self.size.width * 0.8, y: self.size.height*0.89)
+        self.addChild(livesLabel)
+        
         startNewLevel()
     }
+    
+    func loseALife(){
+        livesNumber -= 1
+        livesLabel.text = "Lives: \(livesNumber)"
+      /*
+        let scaleUp = SKAction.scale(to: 1.5, duration: 0.2)
+        let scaleDown = SKAction.scale(to: 1, duration: 0.2)
+        let scaleSequence = SKAction.sequence([scaleUp, scaleDown])
+        livesLabel.run(scaleSequence)
+    */
+    }
+    
+    
+    func addScore(){
+        
+        gameScore += 1
+        scoreLabel.text = "Score: \(gameScore)"
+        
+        if gameScore == 10 || gameScore == 25 || gameScore == 50 {
+            startNewLevel()
+        }
+        
+        
+    }
+    
     
     func didBegin(_ contact: SKPhysicsContact) {
         
@@ -103,6 +151,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //If bullet hits enemy
         if body1.categoryBitMask == PhysicsCategories.Bullet && body2.categoryBitMask == PhysicsCategories.Enemy{
+            addScore()
             
   
           if body2.node != nil{
@@ -142,11 +191,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func startNewLevel(){
         
+        levelNumber += 1
+        
+        if self.action(forKey: "spawningEnemies") != nil{
+            self.removeAction(forKey: "spawningEnemies")
+        }
+        
+        var levelDuration = TimeInterval()
+        
+        switch levelNumber {
+        case 1: levelDuration = 1.2
+        case 2: levelDuration = 1
+        case 3: levelDuration = 0.8
+        case 4: levelDuration = 0.5
+        default:
+            levelDuration = 0.5
+            print("cannot find level info")
+        }
+        
         let spawn = SKAction.run(spawnEnemy)
-        let waitToSpawn = SKAction.wait(forDuration: 1)
-        let SpawnSequence = SKAction.sequence([spawn, waitToSpawn])
+        let waitToSpawn = SKAction.wait(forDuration: levelDuration)
+        let SpawnSequence = SKAction.sequence([waitToSpawn,spawn])
         let spawnForever = SKAction.repeatForever(SpawnSequence)
-        self.run(spawnForever)
+        self.run(spawnForever, withKey: "spawningEnemies")
         
     }
     
@@ -191,8 +258,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let moveEnemy = SKAction.move(to: endPoint, duration: 2)
         let deleteEnemy = SKAction.removeFromParent()
-        let enemySequence = SKAction.sequence([moveEnemy, deleteEnemy])
+        let loseALifeAction = SKAction.run(loseALife)
+        let enemySequence = SKAction.sequence([moveEnemy, deleteEnemy, loseALifeAction])
         enemy.run(enemySequence)
+        
+    
         
         
     }

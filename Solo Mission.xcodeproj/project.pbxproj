@@ -17,6 +17,7 @@
 		8B0F575223E4838A00D431E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B0F575023E4838A00D431E9 /* LaunchScreen.storyboard */; };
 		8B0F575D23E4838A00D431E9 /* Solo_MissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0F575C23E4838A00D431E9 /* Solo_MissionTests.swift */; };
 		8B0F576823E4838A00D431E9 /* Solo_MissionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0F576723E4838A00D431E9 /* Solo_MissionUITests.swift */; };
+		8B0F577623E9E72400D431E9 /* theBoldFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B0F577523E9E72400D431E9 /* theBoldFont.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		8B0F576323E4838A00D431E9 /* Solo MissionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Solo MissionUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B0F576723E4838A00D431E9 /* Solo_MissionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solo_MissionUITests.swift; sourceTree = "<group>"; };
 		8B0F576923E4838A00D431E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8B0F577523E9E72400D431E9 /* theBoldFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = theBoldFont.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				8B0F574523E4838600D431E9 /* Actions.sks */,
 				8B0F574723E4838600D431E9 /* GameScene.swift */,
 				8B0F574923E4838600D431E9 /* GameViewController.swift */,
+				8B0F577523E9E72400D431E9 /* theBoldFont.ttf */,
 				8B0F574B23E4838600D431E9 /* Main.storyboard */,
 				8B0F574E23E4838A00D431E9 /* Assets.xcassets */,
 				8B0F575023E4838A00D431E9 /* LaunchScreen.storyboard */,
@@ -240,6 +243,7 @@
 			files = (
 				8B0F574D23E4838600D431E9 /* Main.storyboard in Resources */,
 				8B0F574423E4838600D431E9 /* GameScene.sks in Resources */,
+				8B0F577623E9E72400D431E9 /* theBoldFont.ttf in Resources */,
 				8B0F574F23E4838A00D431E9 /* Assets.xcassets in Resources */,
 				8B0F575223E4838A00D431E9 /* LaunchScreen.storyboard in Resources */,
 				8B0F574623E4838600D431E9 /* Actions.sks in Resources */,
