@@ -9,17 +9,26 @@
 
 import SpriteKit
 
-
+let restartLabel = SKLabelNode(fontNamed: "The Bold Font")
+var gameScore = 0
 class GameScene: SKScene, SKPhysicsContactDelegate {
     //declaring the player spaceship
     let player = SKSpriteNode(imageNamed: "spaceship")
     
-    var gameScore = 0
+   
     let scoreLabel = SKLabelNode(fontNamed: "The Bold Font")
+    let livesLabel = SKLabelNode(fontNamed: "The Bold Font")
     
     var levelNumber = 1
     var livesNumber = 3
-    let livesLabel = SKLabelNode(fontNamed: "The Bold Font")
+
+    enum gameState{
+        case preGame
+        case inGame
+        case afterGame
+    }
+    
+    var currentGameState = gameState.inGame
     
 //    Creating the physics behind the game, assigning each category to a number with binary code
     struct PhysicsCategories {
@@ -59,6 +68,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //setting up the wallpaper and images for the game
     override func didMove(to view: SKView) {
         
+        gameScore = 0
+        
         self.physicsWorld.contactDelegate = self
         
         let background = SKSpriteNode(imageNamed: "background")
@@ -89,7 +100,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         livesLabel.fontSize = 50
         livesLabel.fontColor = SKColor.white
         livesLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
-        livesLabel.position = CGPoint(x: self.size.width * 0.8, y: self.size.height*0.89)
+        livesLabel.position = CGPoint(x: self.size.width*0.8, y: self.size.height*0.89)
+        scoreLabel.zPosition = 100
         self.addChild(livesLabel)
         
         startNewLevel()
@@ -98,12 +110,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func loseALife(){
         livesNumber -= 1
         livesLabel.text = "Lives: \(livesNumber)"
-      /*
         let scaleUp = SKAction.scale(to: 1.5, duration: 0.2)
         let scaleDown = SKAction.scale(to: 1, duration: 0.2)
         let scaleSequence = SKAction.sequence([scaleUp, scaleDown])
         livesLabel.run(scaleSequence)
-    */
+        
+        if livesNumber == 0{
+            runGameOver()
+        }
+
     }
     
     
@@ -119,6 +134,43 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    
+    func runGameOver(){
+        
+        currentGameState = gameState.afterGame
+        
+        self.removeAllActions()
+        
+        self.enumerateChildNodes(withName: "Bullet"){
+            bullet, stop in
+            bullet.removeAllActions()
+            
+        }
+        
+        self.enumerateChildNodes(withName: "Enemy"){
+            enemy, stop in
+            enemy.removeAllActions()
+        }
+        
+        let changeSceneAction = SKAction.run(changeScene)
+        let waitToChangeScene = SKAction.wait(forDuration: 1)
+        let changeSceneSequence = SKAction.sequence([waitToChangeScene, changeSceneAction])
+        self.run(changeSceneSequence)
+        
+        
+    }
+    
+    
+    func changeScene(){
+        
+        let sceneToMoveTo = GameOverScene(size: self.size)
+        sceneToMoveTo.scaleMode = self.scaleMode
+        let myTransition = SKTransition.fade(withDuration: (0.5))
+        self.view!.presentScene(sceneToMoveTo, transition: myTransition)
+        
+        
+        
+    }
     
     func didBegin(_ contact: SKPhysicsContact) {
         
@@ -146,6 +198,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             body1.node?.removeFromParent()
             body2.node?.removeFromParent()
+            
+            runGameOver()
             
         }
         
@@ -200,10 +254,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var levelDuration = TimeInterval()
         
         switch levelNumber {
-        case 1: levelDuration = 1.2
-        case 2: levelDuration = 1
-        case 3: levelDuration = 0.8
-        case 4: levelDuration = 0.5
+        case 1: levelDuration = 2
+        case 2: levelDuration = 1.5
+        case 3: levelDuration = 1
+        case 4: levelDuration = 0.7
         default:
             levelDuration = 0.5
             print("cannot find level info")
@@ -221,6 +275,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func fireBullet() {
         // setting up the bullet and the size and location of it
         let bullet = SKSpriteNode(imageNamed: "bullet")
+        bullet.name = "Bullet"
         bullet.setScale(1)
         bullet.position = player.position
         bullet.zPosition = 1
@@ -246,6 +301,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let endPoint = CGPoint(x: randomXEnd, y: -self.size.height * 0.2)
         
         let enemy = SKSpriteNode(imageNamed: "enemyShip")
+        enemy.name = "Enemy"
         enemy.setScale(0.5)
         enemy.position = startPoint
         enemy.zPosition = 2
@@ -260,7 +316,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let deleteEnemy = SKAction.removeFromParent()
         let loseALifeAction = SKAction.run(loseALife)
         let enemySequence = SKAction.sequence([moveEnemy, deleteEnemy, loseALifeAction])
-        enemy.run(enemySequence)
+        
+        if currentGameState == gameState.inGame{
+            enemy.run(enemySequence)
+        }
         
     
         
@@ -268,8 +327,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        fireBullet()
         
+        if currentGameState == gameState.inGame{
+            fireBullet()
+        }
+    
     }
     
     // Controls and math for moving the player ship
@@ -280,7 +342,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             let amountDragged = pointOfTouch.x - previousPointOfTouch.x
             
-            player.position.x += amountDragged
+            if currentGameState == gameState.inGame{
+                player.position.x += amountDragged
+                player.position.y = self.size.height * 0.2
+            }
+            
+            
+            
 
             // Too far right
             if player.position.x > gameArea.maxX - player.size.width/2 {

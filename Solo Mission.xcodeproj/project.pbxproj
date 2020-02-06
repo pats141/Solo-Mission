@@ -18,6 +18,7 @@
 		8B0F575D23E4838A00D431E9 /* Solo_MissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0F575C23E4838A00D431E9 /* Solo_MissionTests.swift */; };
 		8B0F576823E4838A00D431E9 /* Solo_MissionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0F576723E4838A00D431E9 /* Solo_MissionUITests.swift */; };
 		8B0F577623E9E72400D431E9 /* theBoldFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B0F577523E9E72400D431E9 /* theBoldFont.ttf */; };
+		8B0F577823ECD65800D431E9 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0F577723ECD65800D431E9 /* GameOverScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		8B0F576723E4838A00D431E9 /* Solo_MissionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solo_MissionUITests.swift; sourceTree = "<group>"; };
 		8B0F576923E4838A00D431E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B0F577523E9E72400D431E9 /* theBoldFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = theBoldFont.ttf; sourceTree = "<group>"; };
+		8B0F577723ECD65800D431E9 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				8B0F574323E4838600D431E9 /* GameScene.sks */,
 				8B0F574523E4838600D431E9 /* Actions.sks */,
 				8B0F574723E4838600D431E9 /* GameScene.swift */,
+				8B0F577723ECD65800D431E9 /* GameOverScene.swift */,
 				8B0F574923E4838600D431E9 /* GameViewController.swift */,
 				8B0F577523E9E72400D431E9 /* theBoldFont.ttf */,
 				8B0F574B23E4838600D431E9 /* Main.storyboard */,
@@ -273,6 +276,7 @@
 			files = (
 				8B0F574823E4838600D431E9 /* GameScene.swift in Sources */,
 				8B0F574A23E4838600D431E9 /* GameViewController.swift in Sources */,
+				8B0F577823ECD65800D431E9 /* GameOverScene.swift in Sources */,
 				8B0F574223E4838600D431E9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
