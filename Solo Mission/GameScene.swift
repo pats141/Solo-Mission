@@ -11,6 +11,8 @@ import SpriteKit
 
 let restartLabel = SKLabelNode(fontNamed: "The Bold Font")
 var gameScore = 0
+
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     //declaring the player spaceship
     let player = SKSpriteNode(imageNamed: "spaceship")
@@ -21,6 +23,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var levelNumber = 1
     var livesNumber = 3
+    
+    let tapToStartLabel = SKLabelNode(fontNamed: "The Bold Font")
 
     enum gameState{
         case preGame
@@ -28,7 +32,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case afterGame
     }
     
-    var currentGameState = gameState.inGame
+    var currentGameState = gameState.preGame
     
 //    Creating the physics behind the game, assigning each category to a number with binary code
     struct PhysicsCategories {
@@ -80,7 +84,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
        
         player.setScale(0.5)
-        player.position = CGPoint(x: self.size.width/2, y: self.size.height * 0.2)
+        player.position = CGPoint(x: self.size.width/2, y: self.size.height * 0 - player.size.height)
         player.zPosition = 2
         player.physicsBody = SKPhysicsBody(rectangleOf: player.size)
         player.physicsBody!.affectedByGravity = false
@@ -92,7 +96,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.fontSize = 50
         scoreLabel.fontColor = SKColor.white
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
-        scoreLabel.position = CGPoint(x: self.size.width*0.2, y: self.size.height*0.89)
+        scoreLabel.position = CGPoint(x: self.size.width*0.2, y: self.size.height + scoreLabel.frame.size.height)
         scoreLabel.zPosition = 100
         self.addChild(scoreLabel)
         
@@ -100,11 +104,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         livesLabel.fontSize = 50
         livesLabel.fontColor = SKColor.white
         livesLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
-        livesLabel.position = CGPoint(x: self.size.width*0.8, y: self.size.height*0.89)
-        scoreLabel.zPosition = 100
+        livesLabel.position = CGPoint(x: self.size.width*0.8, y: self.size.height + livesLabel.frame.size.height)
+        livesLabel.zPosition = 100
         self.addChild(livesLabel)
         
-        startNewLevel()
+        let moveOnToScreenAction = SKAction.moveTo(y: self.size.height * 0.85, duration: 0.3)
+        scoreLabel.run(moveOnToScreenAction)
+        livesLabel.run(moveOnToScreenAction)
+        
+        tapToStartLabel.text = "Tap To Begin"
+        tapToStartLabel.fontSize = 90
+        tapToStartLabel.fontColor = SKColor.white
+        tapToStartLabel.zPosition = 1
+        tapToStartLabel.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+        tapToStartLabel.alpha = 0
+        self.addChild(tapToStartLabel  )
+        
+        let fadeInAction = SKAction.fadeIn(withDuration: 0.3)
+        tapToStartLabel.run(fadeInAction)
+        
     }
     
     func loseALife(){
