@@ -25,7 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var livesNumber = 3
     
     let tapToStartLabel = SKLabelNode(fontNamed: "The Bold Font")
- 
+    let versionLabel = SKLabelNode(fontNamed: "The Bold Font")
     
 
     enum gameState{
@@ -122,6 +122,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tapToStartLabel.alpha = 0
         self.addChild(tapToStartLabel )
         
+        versionLabel.text = "Version: 0.1"
+        versionLabel.fontSize = 50
+        versionLabel.fontColor = SKColor.white
+        versionLabel.zPosition = 1
+        versionLabel.position = CGPoint(x: self.size.width/2, y: self.size.height/10)
+        self.addChild(versionLabel)
+        
        
         
         let fadeInAction = SKAction.fadeIn(withDuration: 0.3)
@@ -137,6 +144,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let deleteAction = SKAction.removeFromParent()
         let deleteSequence = SKAction.sequence([fadeOutAction, deleteAction])
         tapToStartLabel.run(deleteSequence)
+        versionLabel.run(deleteSequence)
         
         let moveShipOntoScreenAction = SKAction.moveTo(y: self.size.height*0.2, duration: 0.5)
         let startLevelAction = SKAction.run(startNewLevel)
