@@ -78,11 +78,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.physicsWorld.contactDelegate = self
         
+        for i in 0...1{
+            
         let background = SKSpriteNode(imageNamed: "background")
         background.size = self.size
-        background.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
+        background.anchorPoint = CGPoint(x: 0.5, y: 0)
+        background.position = CGPoint(x: self.size.width/2,
+                                      y: self.size.height * CGFloat(i))
         background.zPosition = 0
+        background.name = "Background"
         self.addChild(background)
+        }
+        
         
        
         player.setScale(0.5)
@@ -122,7 +129,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tapToStartLabel.alpha = 0
         self.addChild(tapToStartLabel )
         
-        versionLabel.text = "Version: 0.1"
+        versionLabel.text = "Version: 0.2"
         versionLabel.fontSize = 50
         versionLabel.fontColor = SKColor.white
         versionLabel.zPosition = 1
@@ -133,6 +140,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let fadeInAction = SKAction.fadeIn(withDuration: 0.3)
         tapToStartLabel.run(fadeInAction)
+        
+    }
+    
+    var lastUpdateTime: TimeInterval = 0
+    var deltaFrameTime: TimeInterval = 0
+    var amountToMovePerSecond: CGFloat = 600.0
+    
+    override func update(_ currentTime: TimeInterval){
+        if lastUpdateTime == 0{
+            lastUpdateTime = currentTime
+        }
+        else{
+            deltaFrameTime = currentTime - lastUpdateTime
+            lastUpdateTime = currentTime
+        }
+        let amountToMoveBackground = amountToMovePerSecond * CGFloat(deltaFrameTime)
+        
+        self.enumerateChildNodes(withName: "Background"){
+            background, stop in
+            
+            background.position.y -= amountToMoveBackground
+            
+            if background.position.y < -self.size.height{
+                background.position.y += self.size.height*2
+            }
+        }
         
     }
     
@@ -299,14 +332,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var levelDuration = TimeInterval()
         
         switch levelNumber {
-        case 1: levelDuration = 5.0
-        case 2: levelDuration = 4.5
-        case 3: levelDuration = 4.0
-        case 4: levelDuration = 3.5
-        case 5: levelDuration = 3.0
-        case 6: levelDuration = 2.5
-        case 7: levelDuration = 2.0
-        case 8: levelDuration = 1.5
+        case 1: levelDuration = 4.0
+        case 2: levelDuration = 3.5
+        case 3: levelDuration = 3.0
+        case 4: levelDuration = 2.0
+        case 5: levelDuration = 1.8
+        case 6: levelDuration = 1.5
+        case 7: levelDuration = 1.0
+        case 8: levelDuration = 0.8
         case 9: levelDuration = 0.75
         default:
             levelDuration = 0.5
