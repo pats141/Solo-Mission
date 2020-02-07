@@ -2,8 +2,8 @@
 //  GameScene.swift
 //  Solo Mission
 //
-//  Created by Evan Tall on 1/31/20.
-// With Urjeet
+//  Created by UE App Devs on 1/31/20.
+//
 //  Copyright © 2020 Evan Tall. All rights reserved.
 //
 
@@ -25,6 +25,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var livesNumber = 3
     
     let tapToStartLabel = SKLabelNode(fontNamed: "The Bold Font")
+ 
+    
 
     enum gameState{
         case preGame
@@ -118,7 +120,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tapToStartLabel.zPosition = 1
         tapToStartLabel.position = CGPoint(x: self.size.width/2, y: self.size.height/2)
         tapToStartLabel.alpha = 0
-        self.addChild(tapToStartLabel  )
+        self.addChild(tapToStartLabel )
+        
+       
         
         let fadeInAction = SKAction.fadeIn(withDuration: 0.3)
         tapToStartLabel.run(fadeInAction)
@@ -160,7 +164,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameScore += 1
         scoreLabel.text = "Score: \(gameScore)"
         
-        if gameScore == 10 || gameScore == 25 || gameScore == 50 {
+        if gameScore == 5 || gameScore == 10 || gameScore == 15 || gameScore == 20 || gameScore == 30 || gameScore == 35 || gameScore == 40 || gameScore == 45 || gameScore == 50 || gameScore == 80 {
             startNewLevel()
         }
         
@@ -287,10 +291,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var levelDuration = TimeInterval()
         
         switch levelNumber {
-        case 1: levelDuration = 2
-        case 2: levelDuration = 1.5
-        case 3: levelDuration = 1
-        case 4: levelDuration = 0.7
+        case 1: levelDuration = 5.0
+        case 2: levelDuration = 4.5
+        case 3: levelDuration = 4.0
+        case 4: levelDuration = 3.5
+        case 5: levelDuration = 3.0
+        case 6: levelDuration = 2.5
+        case 7: levelDuration = 2.0
+        case 8: levelDuration = 1.5
+        case 9: levelDuration = 0.75
         default:
             levelDuration = 0.5
             print("cannot find level info")
