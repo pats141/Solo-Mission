@@ -129,7 +129,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tapToStartLabel.alpha = 0
         self.addChild(tapToStartLabel )
         
-        versionLabel.text = "Version: 0.2"
+        versionLabel.text = "Version: 0.3"
         versionLabel.fontSize = 50
         versionLabel.fontColor = SKColor.white
         versionLabel.zPosition = 1
@@ -423,8 +423,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // Controls and math for moving the player ship
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch: AnyObject in touches{
-            let pointOfTouch =  touch.location(in: self.view)
-            let previousPointOfTouch = touch.previousLocation(in: self.view)
+            let pointOfTouch =  touch.location(in: self)
+            let previousPointOfTouch = touch.previousLocation(in: self)
             
             let amountDragged = pointOfTouch.x - previousPointOfTouch.x
             
