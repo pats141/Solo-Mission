@@ -39,7 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8B0F573E23E4838600D431E9 /* Solo Mission.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Solo Mission.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B0F573E23E4838600D431E9 /* Armada Defense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Armada Defense.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B0F574123E4838600D431E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B0F574323E4838600D431E9 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		8B0F574523E4838600D431E9 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -49,10 +49,10 @@
 		8B0F574E23E4838A00D431E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B0F575123E4838A00D431E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B0F575323E4838A00D431E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B0F575823E4838A00D431E9 /* Solo MissionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Solo MissionTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B0F575823E4838A00D431E9 /* Armada DefenseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Armada DefenseTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B0F575C23E4838A00D431E9 /* Solo_MissionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solo_MissionTests.swift; sourceTree = "<group>"; };
 		8B0F575E23E4838A00D431E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B0F576323E4838A00D431E9 /* Solo MissionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Solo MissionUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B0F576323E4838A00D431E9 /* Armada DefenseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Armada DefenseUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B0F576723E4838A00D431E9 /* Solo_MissionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solo_MissionUITests.swift; sourceTree = "<group>"; };
 		8B0F576923E4838A00D431E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B0F577523E9E72400D431E9 /* theBoldFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = theBoldFont.ttf; sourceTree = "<group>"; };
@@ -97,9 +97,9 @@
 		8B0F573F23E4838600D431E9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8B0F573E23E4838600D431E9 /* Solo Mission.app */,
-				8B0F575823E4838A00D431E9 /* Solo MissionTests.xctest */,
-				8B0F576323E4838A00D431E9 /* Solo MissionUITests.xctest */,
+				8B0F573E23E4838600D431E9 /* Armada Defense.app */,
+				8B0F575823E4838A00D431E9 /* Armada DefenseTests.xctest */,
+				8B0F576323E4838A00D431E9 /* Armada DefenseUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,9 +143,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8B0F573D23E4838600D431E9 /* Solo Mission */ = {
+		8B0F573D23E4838600D431E9 /* Armada Defense */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B0F576C23E4838A00D431E9 /* Build configuration list for PBXNativeTarget "Solo Mission" */;
+			buildConfigurationList = 8B0F576C23E4838A00D431E9 /* Build configuration list for PBXNativeTarget "Armada Defense" */;
 			buildPhases = (
 				8B0F573A23E4838600D431E9 /* Sources */,
 				8B0F573B23E4838600D431E9 /* Frameworks */,
@@ -155,14 +155,14 @@
 			);
 			dependencies = (
 			);
-			name = "Solo Mission";
+			name = "Armada Defense";
 			productName = "Solo Mission";
-			productReference = 8B0F573E23E4838600D431E9 /* Solo Mission.app */;
+			productReference = 8B0F573E23E4838600D431E9 /* Armada Defense.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8B0F575723E4838A00D431E9 /* Solo MissionTests */ = {
+		8B0F575723E4838A00D431E9 /* Armada DefenseTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B0F576F23E4838A00D431E9 /* Build configuration list for PBXNativeTarget "Solo MissionTests" */;
+			buildConfigurationList = 8B0F576F23E4838A00D431E9 /* Build configuration list for PBXNativeTarget "Armada DefenseTests" */;
 			buildPhases = (
 				8B0F575423E4838A00D431E9 /* Sources */,
 				8B0F575523E4838A00D431E9 /* Frameworks */,
@@ -173,14 +173,14 @@
 			dependencies = (
 				8B0F575A23E4838A00D431E9 /* PBXTargetDependency */,
 			);
-			name = "Solo MissionTests";
+			name = "Armada DefenseTests";
 			productName = "Solo MissionTests";
-			productReference = 8B0F575823E4838A00D431E9 /* Solo MissionTests.xctest */;
+			productReference = 8B0F575823E4838A00D431E9 /* Armada DefenseTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8B0F576223E4838A00D431E9 /* Solo MissionUITests */ = {
+		8B0F576223E4838A00D431E9 /* Armada DefenseUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B0F577223E4838A00D431E9 /* Build configuration list for PBXNativeTarget "Solo MissionUITests" */;
+			buildConfigurationList = 8B0F577223E4838A00D431E9 /* Build configuration list for PBXNativeTarget "Armada DefenseUITests" */;
 			buildPhases = (
 				8B0F575F23E4838A00D431E9 /* Sources */,
 				8B0F576023E4838A00D431E9 /* Frameworks */,
@@ -191,9 +191,9 @@
 			dependencies = (
 				8B0F576523E4838A00D431E9 /* PBXTargetDependency */,
 			);
-			name = "Solo MissionUITests";
+			name = "Armada DefenseUITests";
 			productName = "Solo MissionUITests";
-			productReference = 8B0F576323E4838A00D431E9 /* Solo MissionUITests.xctest */;
+			productReference = 8B0F576323E4838A00D431E9 /* Armada DefenseUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -219,7 +219,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8B0F573923E4838600D431E9 /* Build configuration list for PBXProject "Solo Mission" */;
+			buildConfigurationList = 8B0F573923E4838600D431E9 /* Build configuration list for PBXProject "Armada Defense" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -232,9 +232,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8B0F573D23E4838600D431E9 /* Solo Mission */,
-				8B0F575723E4838A00D431E9 /* Solo MissionTests */,
-				8B0F576223E4838A00D431E9 /* Solo MissionUITests */,
+				8B0F573D23E4838600D431E9 /* Armada Defense */,
+				8B0F575723E4838A00D431E9 /* Armada DefenseTests */,
+				8B0F576223E4838A00D431E9 /* Armada DefenseUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -302,12 +302,12 @@
 /* Begin PBXTargetDependency section */
 		8B0F575A23E4838A00D431E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8B0F573D23E4838600D431E9 /* Solo Mission */;
+			target = 8B0F573D23E4838600D431E9 /* Armada Defense */;
 			targetProxy = 8B0F575923E4838A00D431E9 /* PBXContainerItemProxy */;
 		};
 		8B0F576523E4838A00D431E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8B0F573D23E4838600D431E9 /* Solo Mission */;
+			target = 8B0F573D23E4838600D431E9 /* Armada Defense */;
 			targetProxy = 8B0F576423E4838A00D431E9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -460,7 +460,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.et.Solo-Mission";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Armada Defense";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -481,7 +481,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.et.Solo-Mission";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Armada Defense";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -506,7 +506,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Solo Mission.app/Solo Mission";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Armada Defense.app/Armada Defense";
 			};
 			name = Debug;
 		};
@@ -528,7 +528,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Solo Mission.app/Solo Mission";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Armada Defense.app/Armada Defense";
 			};
 			name = Release;
 		};
@@ -575,7 +575,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8B0F573923E4838600D431E9 /* Build configuration list for PBXProject "Solo Mission" */ = {
+		8B0F573923E4838600D431E9 /* Build configuration list for PBXProject "Armada Defense" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B0F576A23E4838A00D431E9 /* Debug */,
@@ -584,7 +584,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B0F576C23E4838A00D431E9 /* Build configuration list for PBXNativeTarget "Solo Mission" */ = {
+		8B0F576C23E4838A00D431E9 /* Build configuration list for PBXNativeTarget "Armada Defense" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B0F576D23E4838A00D431E9 /* Debug */,
@@ -593,7 +593,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B0F576F23E4838A00D431E9 /* Build configuration list for PBXNativeTarget "Solo MissionTests" */ = {
+		8B0F576F23E4838A00D431E9 /* Build configuration list for PBXNativeTarget "Armada DefenseTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B0F577023E4838A00D431E9 /* Debug */,
@@ -602,7 +602,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B0F577223E4838A00D431E9 /* Build configuration list for PBXNativeTarget "Solo MissionUITests" */ = {
+		8B0F577223E4838A00D431E9 /* Build configuration list for PBXNativeTarget "Armada DefenseUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B0F577323E4838A00D431E9 /* Debug */,

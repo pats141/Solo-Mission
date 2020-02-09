@@ -42,7 +42,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         static let Player: UInt32 = 0b1 //1
         static let Bullet: UInt32 = 0b10 //2
         static let Enemy: UInt32 = 0b100 //4
-        
+        static let ExtraLife: UInt32 = 0b1000
     }
     
     func random() -> CGFloat {
@@ -90,7 +90,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(background)
         }
         
-        
+       /* let pauseButton = SKSpriteNode(imageNamed: "PauseButton")
+        pauseButton.size = self.size
+        pauseButton.position = CGPoint(x:self.size.width/2, y:self.size.height/2*5)
+        pauseButton.zPosition = 100
+        self.addChild(pauseButton)
+       */
        
         player.setScale(0.5)
         player.position = CGPoint(x: self.size.width/2, y: self.size.height * 0 - player.size.height)
@@ -255,6 +260,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var body1 = SKPhysicsBody()
         var body2 = SKPhysicsBody()
         
+        
         if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask{
             body1 = contact.bodyA
             body2 = contact.bodyB
@@ -324,6 +330,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func startNewLevel(){
         
         levelNumber += 1
+        SKAction.run(spawnExtraLife)
         
         if self.action(forKey: "spawningEnemies") != nil{
             self.removeAction(forKey: "spawningEnemies")
@@ -342,7 +349,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case 8: levelDuration = 0.8
         case 9: levelDuration = 0.75
         default:
-            levelDuration = 0.5
+            levelDuration = 0.69
             print("cannot find level info")
         }
         
@@ -403,11 +410,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if currentGameState == gameState.inGame{
             enemy.run(enemySequence)
         }
-        
     
+    }
+    func spawnExtraLife(){
+        let randomYStart = random(min:gameArea.minY, max: gameArea.maxY)
+        let randomYEnd = random(min: gameArea.minY, max: gameArea.maxY)
+        
+        let startPointLife = CGPoint(x: self.size.width * 1.2, y: randomYStart)
+        let endPointLife = CGPoint(x: -self.size.width * 0.2, y: randomYEnd)
+        
+        let extraLife = SKSpriteNode(imageNamed: "Extra Life")
+        extraLife.name = "ExtraLife"
+        extraLife.setScale(1.5)
+        extraLife.position = startPointLife
+        extraLife.zPosition = 2
+        extraLife.physicsBody = SKPhysicsBody(rectangleOf: extraLife.size)
+        extraLife.physicsBody!.affectedByGravity = false
+        extraLife.physicsBody!.categoryBitMask = PhysicsCategories.ExtraLife
+        extraLife.physicsBody!.collisionBitMask = PhysicsCategories.None
+        extraLife.physicsBody!.contactTestBitMask = PhysicsCategories.Bullet
+        self.addChild(extraLife)
+        
+        let moveExtraLife = SKAction.move(to: endPointLife, duration: 2)
+        let deleteLife = SKAction.removeFromParent()
+        let lifeSequence = SKAction.sequence([moveExtraLife, deleteLife])
+        extraLife.run(lifeSequence)
+        
+        
+        
+        
+        
+        
+        
         
         
     }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
