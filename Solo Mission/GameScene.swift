@@ -16,7 +16,7 @@ var gameScore = 0
 class GameScene: SKScene, SKPhysicsContactDelegate {
     //declaring the player spaceship
     let player = SKSpriteNode(imageNamed: "spaceship")
-    
+
    
     let scoreLabel = SKLabelNode(fontNamed: "The Bold Font")
     let livesLabel = SKLabelNode(fontNamed: "The Bold Font")
@@ -69,12 +69,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+
     
     
     //setting up the wallpaper and images for the game
     override func didMove(to view: SKView) {
         
         gameScore = 0
+        
         
         self.physicsWorld.contactDelegate = self
         
@@ -186,6 +188,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let moveShipOntoScreenAction = SKAction.moveTo(y: self.size.height*0.2, duration: 0.5)
         let startLevelAction = SKAction.run(startNewLevel)
+        //let spawnNewLife = SKAction.run(spawnExtraLife)
         let startGameSequence = SKAction.sequence([moveShipOntoScreenAction, startLevelAction])
         player.run(startGameSequence)
     }
@@ -204,6 +207,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
     
+    func addALife(){
+             livesNumber += 1
+             livesLabel.text = "Lives: \(livesNumber)"
+             let scaleUp = SKAction.scale(to: 1.5, duration: 0.2)
+             let scaleDown = SKAction.scale(to: 1, duration: 0.2)
+             let scaleSequence = SKAction.sequence([scaleUp, scaleDown])
+             livesLabel.run(scaleSequence)
+             
+             if livesNumber == 0{
+                 runGameOver()
+             }
+
+         }
     
     func addScore(){
         
@@ -287,6 +303,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         }
         
+        //If bullet hits extraLife
+        if body1.categoryBitMask == PhysicsCategories.Bullet && body2.categoryBitMask == PhysicsCategories.ExtraLife{
+            addALife()
+            
+            if body2.node != nil{
+                         if body2.node!.position.x > self.size.width{
+                             return
+                         }
+                         else{
+                         spawnExplosion(spawnPosition: body2.node!.position)
+                         }
+                     }
+
+                       body1.node?.removeFromParent()
+                       body2.node?.removeFromParent()
+            
+        }
+        
+        
         //If bullet hits enemy
         if body1.categoryBitMask == PhysicsCategories.Bullet && body2.categoryBitMask == PhysicsCategories.Enemy{
             addScore()
@@ -330,7 +365,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func startNewLevel(){
         
         levelNumber += 1
-        SKAction.run(spawnExtraLife)
+        spawnExtraLife()
         
         if self.action(forKey: "spawningEnemies") != nil{
             self.removeAction(forKey: "spawningEnemies")
@@ -373,7 +408,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bullet.physicsBody!.affectedByGravity = false
         bullet.physicsBody!.categoryBitMask = PhysicsCategories.Bullet
         bullet.physicsBody!.collisionBitMask = PhysicsCategories.None
-        bullet.physicsBody!.contactTestBitMask = PhysicsCategories.Enemy
+        bullet.physicsBody!.contactTestBitMask = PhysicsCategories.Enemy | PhysicsCategories.ExtraLife
         self.addChild(bullet)
         
         let moveBullet = SKAction.moveTo(y: self.size.height + bullet.size.height, duration: 1)
@@ -416,12 +451,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let randomYStart = random(min:gameArea.minY, max: gameArea.maxY)
         let randomYEnd = random(min: gameArea.minY, max: gameArea.maxY)
         
-        let startPointLife = CGPoint(x: self.size.width * 1.2, y: randomYStart)
-        let endPointLife = CGPoint(x: -self.size.width * 0.2, y: randomYEnd)
+        let startPointLife = CGPoint(x: -self.size.width * 0.2, y: randomYStart)
+        let endPointLife = CGPoint(x: self.size.width * 1.2, y: randomYEnd)
         
         let extraLife = SKSpriteNode(imageNamed: "Extra Life")
         extraLife.name = "ExtraLife"
-        extraLife.setScale(1.5)
+        extraLife.setScale(0.5)
         extraLife.position = startPointLife
         extraLife.zPosition = 2
         extraLife.physicsBody = SKPhysicsBody(rectangleOf: extraLife.size)
@@ -431,7 +466,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         extraLife.physicsBody!.contactTestBitMask = PhysicsCategories.Bullet
         self.addChild(extraLife)
         
-        let moveExtraLife = SKAction.move(to: endPointLife, duration: 2)
+        let moveExtraLife = SKAction.move(to: endPointLife, duration: 2.5)
         let deleteLife = SKAction.removeFromParent()
         let lifeSequence = SKAction.sequence([moveExtraLife, deleteLife])
         extraLife.run(lifeSequence)
