@@ -20,9 +20,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
    
     let scoreLabel = SKLabelNode(fontNamed: "The Bold Font")
     let livesLabel = SKLabelNode(fontNamed: "The Bold Font")
+    let bulletLabel = SKLabelNode(fontNamed: "The Bold Font")
     
     var levelNumber = 1
     var livesNumber = 3
+    var bulletCount = 0
     
     let tapToStartLabel = SKLabelNode(fontNamed: "The Bold Font")
     let versionLabel = SKLabelNode(fontNamed: "The Bold Font")
@@ -116,6 +118,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.zPosition = 100
         self.addChild(scoreLabel)
         
+        
+        bulletLabel.text = "Bullets: 0"
+        bulletLabel.fontSize = 50
+        bulletLabel.fontColor = SKColor.white
+        bulletLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        bulletLabel.position = CGPoint(x: self.size.width*0.2, y: self.size.height + bulletLabel.frame.size.height)
+        bulletLabel.zPosition = 100
+        self.addChild(bulletLabel)
+        
+        
         livesLabel.text = "Lives: 3"
         livesLabel.fontSize = 50
         livesLabel.fontColor = SKColor.white
@@ -127,6 +139,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let moveOnToScreenAction = SKAction.moveTo(y: self.size.height * 0.85, duration: 0.3)
         scoreLabel.run(moveOnToScreenAction)
         livesLabel.run(moveOnToScreenAction)
+         let moveOnToScreenAction2 = SKAction.moveTo(y: self.size.height * 0.80, duration: 0.3)
+        bulletLabel.run(moveOnToScreenAction2)
         
         tapToStartLabel.text = "Tap To Begin"
         tapToStartLabel.fontSize = 90
@@ -136,7 +150,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         tapToStartLabel.alpha = 0
         self.addChild(tapToStartLabel )
         
-        versionLabel.text = "Version: 0.3"
+        versionLabel.text = "Version: 0.4"
         versionLabel.fontSize = 50
         versionLabel.fontColor = SKColor.white
         versionLabel.zPosition = 1
@@ -230,6 +244,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             startNewLevel()
         }
         
+          if gameScore == 5 || gameScore == 10 || gameScore == 15 || gameScore == 20 || gameScore == 30 || gameScore == 35 || gameScore == 40 || gameScore == 45 || gameScore == 50 || gameScore == 80 || gameScore == 90 || gameScore == 100 || gameScore == 130 || gameScore == 150 || gameScore == 175 || gameScore == 200 {
+            spawnExtraLife()
+        }
         
     }
     
@@ -365,7 +382,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func startNewLevel(){
         
         levelNumber += 1
-        spawnExtraLife()
         
         if self.action(forKey: "spawningEnemies") != nil{
             self.removeAction(forKey: "spawningEnemies")
@@ -411,10 +427,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bullet.physicsBody!.contactTestBitMask = PhysicsCategories.Enemy | PhysicsCategories.ExtraLife
         self.addChild(bullet)
         
+        
+        addBulletCount()
         let moveBullet = SKAction.moveTo(y: self.size.height + bullet.size.height, duration: 1)
         let deleteBullet = SKAction.removeFromParent()
         let bulletSequence = SKAction.sequence([moveBullet, deleteBullet])
         bullet.run(bulletSequence)
+    }
+    func addBulletCount(){
+       
+        bulletCount += 1
+         bulletLabel.text = "Bullets: \(bulletCount)"
     }
     
     //Spawn enemy method
@@ -448,8 +471,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     }
     func spawnExtraLife(){
-        let randomYStart = random(min:gameArea.minY, max: gameArea.maxY)
-        let randomYEnd = random(min: gameArea.minY, max: gameArea.maxY)
+        let randomYStart = random(min:gameArea.minY * 1.4, max: gameArea.maxY)
+        let randomYEnd = random(min: gameArea.minY * 1.4, max: gameArea.maxY)
         
         let startPointLife = CGPoint(x: -self.size.width * 0.2, y: randomYStart)
         let endPointLife = CGPoint(x: self.size.width * 1.2, y: randomYEnd)

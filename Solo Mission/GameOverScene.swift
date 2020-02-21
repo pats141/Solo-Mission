@@ -36,6 +36,7 @@ class GameOverScene: SKScene{
         scoreLabel.zPosition = 1
         self.addChild(scoreLabel)
         
+        
         let defaults = UserDefaults()
         var highScoreNumber = defaults.integer(forKey: "highScoreSaved")
         
